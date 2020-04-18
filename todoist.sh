@@ -10,10 +10,12 @@ if [[ $BROWSER == '' ]]; then
 	BROWSER="firefox"
 fi
 
-TODO_LIST=`todoist --csv --color l -f '(overdue|today)'`
+todoist s
 
-if [[ $TODO_LIST -ne "" ]]; then
-	list_tasks=`todoist s; unbuffer todoist --csv --color l -f '(overdue|today)'  | ansifilter -M | head -n -1 | awk -F ',' '{print "•<span font-weight=\"bold\">",$4,"</span>;",$5,";",$6}' | column -t -s ';' -o ' '`
+TODO_LIST=`unbuffer todoist --csv --color l -f '(overdue|today)'`
+
+if [[ $TODO_LIST != "" ]]; then
+	list_tasks=`echo $TODO_LIST | ansifilter -M | head -n -1 | awk -F ',' '{print "•<span font-weight=\"bold\">",$4,"</span>;",$5,";",$6}' | column -t -s ';' -o ' '`
 	num_tasks=`echo "$list_tasks" | wc -l`
 
 	n_color="white"
