@@ -11,6 +11,11 @@
 
 _PATH=`dirname $(realpath $0)`
 
+# Use firefox if no default browser is set. Change this to your fav
+if [[ $BROWSER == '' ]]; then
+	BROWSER="firefox"
+fi
+
 URL=`awk -F ';' 'FNR==1 {print $2}' $_PATH/rss-auth`
 EMAIL=`awk -F ';' 'FNR==2 {print $2}' $_PATH/rss-auth`
 PASSWD=`awk -F ';' 'FNR==3 {print $2}' $_PATH/rss-auth`
@@ -34,5 +39,5 @@ fi
 
 echo "<txt> <span color='orange' size='x-large'></span> <span rise='3000' color=\"$n_color\">$num</span> </txt>"
 echo "<tool>$num unread items</tool>"
-echo "<click>firefox 'https://rss.shadenexus.com'</click>"
-echo "<txtclick>firefox 'https://rss.shadenexus.com'</txtclick>"
+echo "<click>$BROWSER 'https://rss.shadenexus.com'</click>"
+echo "<txtclick>$BROWSER 'https://rss.shadenexus.com'</txtclick>"
