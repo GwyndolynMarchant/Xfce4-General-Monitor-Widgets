@@ -9,7 +9,7 @@ PLAY_SYM='⏹️'
 
 if [[ $PLAYERSTATUS == 'Playing' ]]; then
 	PLAY_SYM='▶️'
-elif [[ $PLAYERSTATUS == 'Stopped' ]]; then
+elif [[ $PLAYERSTATUS == 'Paused' ]]; then
 	PLAY_SYM='⏸️'
 else
 	# exit if nothing is playing
