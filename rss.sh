@@ -1,10 +1,13 @@
 #!/bin/bash
 # Get the current number of feed items and output them
-
+#
 # Requires a seperate rss-auth file that contains the following fields:
 #	greader;$URL	// root of greader-compliant feed reader
 #	email;$EMAIL 	// user used to login to service
 #	passwd;$PASSWD 	// password used for api
+#
+# You can set _PATH below to a different directory if you wish to store
+# your RSS credentials elsewhere
 
 _PATH=`dirname $(realpath $0)`
 
