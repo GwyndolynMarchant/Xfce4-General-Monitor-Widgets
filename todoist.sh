@@ -2,7 +2,8 @@
 # Todoist task count widget, using todoist-cli, to show how many tasks remain today
 # Requirements:
 #	todoist (cli): https://github.com/sachaos/todoist
-#	ansifilter:
+#	ansifilter: https://github.com/andre-simon/ansifilter
+#	unbuffer, awk, head, column
 
 # Use firefox if no default browser is set. Change this to your fav
 if [[ $BROWSER == '' ]]; then

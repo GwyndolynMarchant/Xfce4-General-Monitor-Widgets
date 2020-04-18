@@ -1,5 +1,8 @@
 #!/bin/bash
 # Get the current number of feed items and output them
+# Requirements
+#	jq: https://stedolan.github.io/jq/
+#	dirname, realpath, awk, curl
 #
 # Requires a seperate rss-auth file that contains the following fields:
 #	greader;$URL	// root of greader-compliant feed reader
