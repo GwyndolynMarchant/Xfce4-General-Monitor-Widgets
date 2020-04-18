@@ -21,5 +21,5 @@ elif [[ num -gt 3 ]]; then
 fi
 
 echo "<txt> <span color='Orange Red' size='x-large'></span> <span rise='3000' color=\"$n_color\">$num_tasks</span> </txt>"
-echo "<tool><span face='SF Mono' font-weight='light' size='10500'>$list_tasks</span></tool>"
+echo "<tool><span font_family='mono' font-weight='light' size='9000'>$list_tasks</span></tool>"
 echo "<txtclick>$BROWSER 'https://todoist.com/app'</txtclick>"
