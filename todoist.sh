@@ -15,7 +15,7 @@ todoist s
 TODO_LIST=`unbuffer todoist --csv --color l -f '(overdue|today)'`
 
 if [[ $TODO_LIST != "" ]]; then
-	list_tasks=`echo $TODO_LIST | ansifilter -M | head -n -1 | awk -F ',' '{print "•<span font-weight=\"bold\">",$4,"</span>;",$5,";",$6}' | column -t -s ';' -o ' '`
+	list_tasks=`echo "$TODO_LIST" | ansifilter -M | head -n -1 | awk -F ',' '{print "•<span font-weight=\"bold\">",$4,"</span>;",$5,";",$6}' | column -t -s ';' -o ' '`
 	num_tasks=`echo "$list_tasks" | wc -l`
 
 	n_color="white"
