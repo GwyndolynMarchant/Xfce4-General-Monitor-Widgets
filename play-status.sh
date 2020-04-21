@@ -2,8 +2,11 @@
 # Display now-playing information
 # Requires:
 #	playerctl: https://github.com/altdesktop/playerctl
+#
+# WARNING: Recent errors in arch have started producing dbus errors when no player is present.
+# Temporary fix by redirecting errors to null
 
-PLAYERSTATUS=`playerctl status`
+PLAYERSTATUS=`playerctl status 2>&-`
 
 PLAY_SYM='⏹️'
 
@@ -13,6 +16,10 @@ elif [[ $PLAYERSTATUS == 'Paused' ]]; then
 	PLAY_SYM='⏸️'
 else
 	# exit if nothing is playing
+	echo "<txt> ⏹️  </txt>"
+	echo "<tool>No player connected</tool>"
+	echo "<txtclick></txtclick>"
+
 	exit
 fi
 
@@ -41,12 +48,6 @@ fi
 
 STATUS_TEXT=`playerctl metadata -f "$NOWPLAY $PLAY_SYM {{ duration(position) }}$LENGTH"`
 
-if [[ $STATUS_TEXT == '' ]]; then
-	echo "<txt> ⏹️  </txt>"
-	echo "<tool>No player connected</tool>"
-	echo "<txtclick></txtclick>"
-else
-	echo "<txt> <span bgcolor='#0A84FF'> $PLAYERNAME </span><span bgcolor='#1C1C1E'> $STATUS_TEXT </span> </txt>"
-	echo "<tool>$PLAYERSTATUS $NOWPLAY on $PLAYERNAME</tool>"
-	echo "<txtclick>playerctl play-pause</txtclick>"
-fi
+echo "<txt> <span bgcolor='#0A84FF'> $PLAYERNAME </span><span bgcolor='#1C1C1E'> $STATUS_TEXT </span> </txt>"
+echo "<tool>$PLAYERSTATUS $NOWPLAY on $PLAYERNAME</tool>"
+echo "<txtclick>playerctl play-pause</txtclick>"
