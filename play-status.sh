@@ -2,11 +2,17 @@
 # Display now-playing information
 # Requires:
 #	playerctl: https://github.com/altdesktop/playerctl
-#
+
+# WARNING: Playerctl does not currently play nice with chromium, and the widget will flat
+# ignore all instances. This was specifically causing issues with Discord
+
+PLAYCONTROL="playerctl --ignore-player=chromium"
+
 # WARNING: Recent errors in arch have started producing dbus errors when no player is present.
 # Temporary fix by redirecting errors to null
 
-PLAYERSTATUS=`playerctl status 2>&-`
+
+PLAYERSTATUS=`$PLAYCONTROL status 2>&-`
 
 PLAY_SYM='⏹️'
 
@@ -23,30 +29,30 @@ else
 	exit
 fi
 
-PLAYERNAME=`playerctl metadata -f '{{playerName}}'`
+PLAYERNAME=`$PLAYCONTROL metadata -f '{{playerName}}'`
 
 NOWPLAY=''
 
 # Get stream title info from cmus
 if [[ $PLAYERNAME == 'cmus' ]]; then
-	NOWPLAY=`playerctl metadata -f '{{cmus:stream_title}}'`
+	NOWPLAY=`$PLAYCONTROL metadata -f '{{cmus:stream_title}}'`
 fi
 
 # Fill in Now Playing information with defaults if nothing else found
 if [[ $NOWPLAY == '' ]]; then
-	NOWPLAY=`playerctl metadata -f '{{artist}} - {{title}}'`
+	NOWPLAY=`$PLAYCONTROL metadata -f '{{artist}} - {{title}}'`
 fi
 
-LENGTH=`playerctl metadata -f '{{mpris:length}}'`
+LENGTH=`$PLAYCONTROL metadata -f '{{mpris:length}}'`
 
 # If a stream is running it will be 
 if [[ $LENGTH -lt 0 ]]; then
 	LENGTH=''
 else
-	LENGTH=`playerctl metadata -f '/{{duration(mpris:length)}}'`
+	LENGTH=`$PLAYCONTROL metadata -f '/{{duration(mpris:length)}}'`
 fi
 
-STATUS_TEXT=`playerctl metadata -f "$NOWPLAY $PLAY_SYM {{ duration(position) }}$LENGTH"`
+STATUS_TEXT=`$PLAYCONTROL metadata -f "$NOWPLAY $PLAY_SYM {{ duration(position) }}$LENGTH"`
 
 echo "<txt> <span bgcolor='#0A84FF'> $PLAYERNAME </span><span bgcolor='#1C1C1E'> $STATUS_TEXT </span> </txt>"
 echo "<tool>$PLAYERSTATUS $NOWPLAY on $PLAYERNAME</tool>"
