@@ -3,6 +3,11 @@
 # Requires:
 #	playerctl: https://github.com/altdesktop/playerctl
 
+# Colors
+
+PLAYER_BG='#0A84FF'
+TEXT_BG='#1C1C1E'
+
 # WARNING: Playerctl does not currently play nice with chromium, and the widget will flat
 # ignore all instances. This was specifically causing issues with Discord
 
@@ -54,6 +59,6 @@ fi
 
 STATUS_TEXT=`$PLAYCONTROL metadata -f "$NOWPLAY $PLAY_SYM {{ duration(position) }}$LENGTH"`
 
-echo "<txt> <span bgcolor='#0A84FF'> $PLAYERNAME </span><span bgcolor='#1C1C1E'> $STATUS_TEXT </span> </txt>"
+echo "<txt> <span bgcolor='$PLAYER_BG'> $PLAYERNAME </span><span bgcolor='$TEXT_BG'> $STATUS_TEXT </span> </txt>"
 echo "<tool>$PLAYERSTATUS $NOWPLAY on $PLAYERNAME</tool>"
-echo "<txtclick>playerctl play-pause</txtclick>"
+echo "<txtclick>$PLAYCONTROL play-pause</txtclick>"
