@@ -49,15 +49,17 @@ if [[ $NOWPLAY == '' ]]; then
 fi
 
 LENGTH=`$PLAYCONTROL metadata -f '{{mpris:length}}'`
+DURATION=''
 
 # If a stream is running it will be 
 if [[ $LENGTH -lt 0 ]]; then
 	LENGTH=''
-else
+elif [[ $LENGTH != '' ]]; then
 	LENGTH=`$PLAYCONTROL metadata -f '/{{duration(mpris:length)}}'`
+	DURATION=`$PLAYCONTROL metadata -f '{{duration(position)}}'`
 fi
 
-STATUS_TEXT=`$PLAYCONTROL metadata -f "$NOWPLAY $PLAY_SYM {{ duration(position) }}$LENGTH"`
+STATUS_TEXT=`$PLAYCONTROL metadata -f "$NOWPLAY $PLAY_SYM $DURATION$LENGTH"`
 
 echo "<txt> <span bgcolor='$PLAYER_BG'> $PLAYERNAME </span><span bgcolor='$TEXT_BG'> $STATUS_TEXT </span> </txt>"
 echo "<tool>$PLAYERSTATUS $NOWPLAY on $PLAYERNAME</tool>"
