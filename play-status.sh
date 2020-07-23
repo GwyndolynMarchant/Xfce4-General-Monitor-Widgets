@@ -5,8 +5,9 @@
 
 # Colors
 
-PLAYER_BG='#0A84FF'
-TEXT_BG='#1C1C1E'
+PLAYER_BG='#1D72E9'
+PLAYER_FG='#C0C0C0'
+TEXT_BG='#E0DEE1'
 
 # WARNING: Playerctl does not currently play nice with chromium, and the widget will flat
 # ignore all instances. This was specifically causing issues with Discord
@@ -15,7 +16,6 @@ PLAYCONTROL="playerctl --ignore-player=chromium"
 
 # WARNING: Recent errors in arch have started producing dbus errors when no player is present.
 # Temporary fix by redirecting errors to null
-
 
 PLAYERSTATUS=`$PLAYCONTROL status 2>&-`
 
@@ -61,6 +61,6 @@ fi
 
 STATUS_TEXT=`$PLAYCONTROL metadata -f "$NOWPLAY $PLAY_SYM $DURATION$LENGTH"`
 
-echo "<txt> <span bgcolor='$PLAYER_BG'> $PLAYERNAME </span><span bgcolor='$TEXT_BG'> $STATUS_TEXT </span> </txt>"
+echo "<txt> <span bgcolor='$PLAYER_BG' fgcolor='$PLAYER_FG'> $PLAYERNAME </span><span bgcolor='$TEXT_BG'> $STATUS_TEXT </span> </txt>"
 echo "<tool>$PLAYERSTATUS $NOWPLAY on $PLAYERNAME</tool>"
 echo "<txtclick>$PLAYCONTROL play-pause</txtclick>"
