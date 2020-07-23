@@ -29,6 +29,14 @@ Queries the current number of unread items from a greader-compatible web feedrea
 - awk
 - curl
 
+### Configuration
+Create a file named `rss-auth` that contains the following fields:
+```
+greader;$URL	// root of greader-compliant feed reader
+email;$EMAIL 	// user used to login to service
+passwd;$PASSWD 	// password used for api
+```
+
 ## Todoist
 
 Displays how many tasks you have remaining for today. (Both today's and overdue tasks.) Provides a tooltip showing a summary of the tasks. 
