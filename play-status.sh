@@ -45,7 +45,9 @@ fi
 
 # Fill in Now Playing information with defaults if nothing else found
 if [[ $NOWPLAY == '' ]]; then
-	NOWPLAY=`$PLAYCONTROL metadata -f '{{artist}} - {{title}}'`
+	NOWPLAY=`$PLAYCONTROL metadata -f '👤 {{artist}} 🖭 {{title}}'`
+else
+	NOWPLAY="📻 $NOWPLAY"
 fi
 
 LENGTH=`$PLAYCONTROL metadata -f '{{mpris:length}}'`
