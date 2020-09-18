@@ -14,9 +14,9 @@
 
 _PATH=`dirname $(realpath $0)`
 
-# Use firefox if no default browser is set. Change this to your fav
+# Use xdg-open if no default browser is set. Change this to your fav
 if [[ $BROWSER == '' ]]; then
-	BROWSER="firefox"
+	BROWSER="xdg-open"
 fi
 
 URL=`awk -F ';' 'FNR==1 {print $2}' $_PATH/rss-auth`

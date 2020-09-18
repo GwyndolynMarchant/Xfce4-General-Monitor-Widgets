@@ -5,9 +5,9 @@
 #	ansifilter: https://github.com/andre-simon/ansifilter
 #	unbuffer, awk, head, column
 
-# Use firefox if no default browser is set. Change this to your fav
+# Use xdg-open if no default browser is set. Change this to your fav
 if [[ $BROWSER == '' ]]; then
-	BROWSER="firefox"
+	BROWSER="xdg-open"
 fi
 
 todoist s
@@ -19,7 +19,7 @@ if [[ $TODO_LIST != "" ]]; then
 				ansifilter -M |
 				head -n -1 |
 				awk -F ',' '{print "•<span font-weight=\"bold\">",$4,"</span>|",$5,"|",$6}' |
-				column -t -s '|' -o ' '`
+				column -t -s '|'`
 
 	num_tasks=`echo "$list_tasks" | wc -l`
 
